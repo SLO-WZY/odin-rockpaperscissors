@@ -3,7 +3,12 @@
 //Scissors = 2
 let humanScore = 0
 let computerScore = 0
-
+function resetGame() {
+  humanScore = 0;
+  computerScore = 0;
+  humanScoreSpan.textContent = 0;
+  computerScoreSpan.textContent = 0;
+}
 function determineWinner(humanChoice, computerChoice) {
     const outcome = ((humanChoice-computerChoice + 3)%3)
     //adding 3 removes negative sum
@@ -30,8 +35,9 @@ const buttons = document.querySelectorAll(".buttons button");
 
 buttons.forEach(button => {
     button.addEventListener("click", () => {
-        if (humanScore >= 3 || computerScore >= 3) {return
-            //alert ze koniec, i ze mozna zresetowac pypypk
+        if (humanScore >= 3 || computerScore >= 3) {
+            alert("Game result: " + (humanScore === 3 ? "You won!" : "Computer won!"))
+            resetGame();
         }
         
         const humanChoice = getHumanChoice(button.className)

@@ -10,10 +10,12 @@ body {
     height: 90px;
     font-size: 30px;
     text-align: center;
-    margin: 0
-    
-    
+    margin: 0;
+}
 
+.buttons button:active {
+    background-color: #ccc;
+    transform: scale(0.95);
 }
 
 .buttons {
@@ -28,7 +30,7 @@ body {
 .scoreboard {
     display: flex;
     justify-content: space-between;
-    margin: 0px 500px;
+    margin: 0px 900px;
     background-color: bisque;
 }
 .winner {
