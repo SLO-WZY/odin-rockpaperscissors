@@ -3,7 +3,6 @@
 //Scissors = 2
 let humanScore = 0
 let computerScore = 0
-const names = ['rock', 'paper', 'scissors']
 
 function determineWinner(humanChoice, computerChoice) {
     const outcome = ((humanChoice-computerChoice + 3)%3)
@@ -22,45 +21,41 @@ function getComputerChoice() {
     }
     return 2
 }
-function getHumanChoice() {
-    output = prompt("pick", "rock/paper/scissors")
-    output = output.toLowerCase()
-    if (output === "rock")
-        return 0
-    if (output ==="paper")
-        return 1
-    return 2
-    
-}
-function playRound(humanChoice, computerChoice) {
-    console.log("Computer choice: " + names[computerChoice])
-    console.log("Your choice: " + names[humanChoice])
-    let winner = "none";
+function getHumanChoice(choice) {
+            if (choice === "rock") return 0;
+            if (choice === "paper") return 1;
+            return 2; // scissors
+        }
+const buttons = document.querySelectorAll(".buttons button");
 
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+        if (humanScore >= 3 || computerScore >= 3) {return
+            //alert ze koniec, i ze mozna zresetowac pypypk
+        }
+        
+        const humanChoice = getHumanChoice(button.className)
+        const computerChoice = getComputerChoice();
 
-    if (determineWinner(humanChoice,computerChoice) == "computer") {
-        console.log("You lose! " + names[computerChoice] + " beats " + names[humanChoice] + ".")
-        computerScore++
-    }
-    
-        else if (determineWinner(humanChoice,computerChoice) == "human") {
-            console.log("You win! " + names[humanChoice] + " beats " + names[computerChoice] + ".")
+        const winner = determineWinner(humanChoice, computerChoice);
+        if (winner === "computer") {
+            computerScore++  
+            console.log("winner is " , winner)
+        }
+        else if (winner === "human") {
             humanScore++
+            console.log("winner is " , winner)
         }
-        else {
-            console.log("draw!")
-        }
-        console.log("Your score:" + humanScore)
-        console.log("Computers score:" + computerScore)
-}
+        else console.log("draw");
+        const humanScoreSpan = document.getElementById("human-score");
+        const computerScoreSpan = document.getElementById("computer-score");
+        const roundWinner = document.getElementById("round-winner");
 
-function playGame() {
-    while (humanScore < 3 && computerScore < 3) {
-        playRound(getHumanChoice(), getComputerChoice());
-    }
-    console.log(humanScore > computerScore ? "You won the game!" : "Computer won the game!");
-}
-
-playGame()
+        humanScoreSpan.textContent = humanScore;
+        computerScoreSpan.textContent = computerScore;
+        roundWinner.textContent = winner;
+        
+    })
+});
 
 
